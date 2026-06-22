@@ -39,9 +39,9 @@ void Plotter::plotTimeDomain(const std::vector<double>& signal, double sampleRat
     plt::figure();
     plt::plot(frequencies, magnitudes);
 
-    plt::title("Frequency Spectrum");
+    plt::title("FFT Magnitude Spectrum");
     plt::xlabel("Frequency (Hz)");
-    plt::ylabel("Magnitude");
+    plt::ylabel("Normalized Magnitude");
     plt::grid(true);
 
     plt::save(filename);
