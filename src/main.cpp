@@ -23,7 +23,7 @@ int main() {
 
     std::vector<double> signal = gen.generateSignal();
 
-    plotter.plotTimeDomain(signal, sampleRate, signal.size(), "signal.png");
+    plotter.plotTimeDomain(signal, sampleRate, signal.size(), "plots/signal.png");
 
     
     // Create an FFTProcessor instance with the same sample rate
@@ -35,7 +35,7 @@ int main() {
         std::cout << "Bin " << i << " (" << freq << " Hz): " << magnitudes[i] <<std::endl;
     }
 
-    plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "spectrum.png");
+    plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "plots/spectrum.png");
 
 
     auto peaks = fft.detectPeaks(magnitudes, 0.1); // Threshold for peak detection
