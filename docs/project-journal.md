@@ -93,19 +93,6 @@ std::vector<double> samples;
 
 # June 23, 2026
 
-## Learned
-
-The FFT does not "find frequencies."
-
-It correlates the sampled signal against sinusoidal basis functions.
-
-The signal itself only contains amplitudes over time.
-
-The frequencies are inferred from how strongly each basis function correlates with the signal.
-
-## Goal
-Replace naive DFT with a recursive Cooley-Tukey FFT.
-
 ## Project Changes
 
 - Renamed computeMagnitude() to computeMagnitudeDFT()
