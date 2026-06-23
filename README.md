@@ -8,41 +8,45 @@ The system is designed to emulate real-world signal processing workflows used in
 
 ---
 
-## Key Features
+## Current Features
 
-- Synthetic RF signal generation with configurable noise and interference
-- Time-domain signal processing pipeline
-- FFT-based frequency spectrum analysis
-- Frequency-domain filtering (band-pass / threshold-based filtering)
-- Peak detection for identifying dominant frequency components
-- Signal-to-noise separation and analysis
-- CSV export for downstream visualization and evaluation
+- Simulates RF-like signals using configurable sine waves and additive noise
+- Performs spectral analysis using both:
+  - Direct Fourier Transform (DFT)
+  - Recursive Cooley–Tukey Fast Fourier Transform (FFT)
+- Applies a Hann window prior to frequency analysis
+- Detects dominant frequency peaks
+- Plots:
+  - Time-domain waveform
+  - Frequency spectrum
+- Modular C++ architecture with separate signal generation, FFT processing, and plotting components
+
+---
+
+## Current Project Structure
+
+SignalGenerator
+        │
+        ▼
+Sampled Signal
+        │
+        ▼
+Windowing
+        │
+        ▼
+DFT / FFT
+        │
+        ▼
+Magnitude Spectrum
+        │
+        ▼
+Peak Detection
+        │
+        ▼
+Visualization
 
 ---
 
-## System Pipeline
-
-The processing flow is structured as follows:
-
-1. Signal Generation  
-   - Simulates RF-like signals using sine waves and noise models
-
-2. Preprocessing  
-   - Optional windowing (e.g., Hamming window) to reduce spectral leakage
-
-3. FFT Processing  
-   - Converts time-domain signals into frequency-domain representation
-
-4. Spectrum Analysis  
-   - Computes magnitude spectrum and identifies frequency components
-
-5. Detection & Filtering  
-   - Applies thresholds and band filtering to isolate meaningful signals
-
-6. Output Generation  
-   - Exports results to CSV for visualization and analysis
-
----
 
 ## Example Use Case
 
@@ -53,18 +57,15 @@ The processing flow is structured as follows:
 
 ---
 
-## Output Data
+## Example Output
 
-The system generates structured CSV outputs:
+### Time-Domain Signal
 
-- `time_domain.csv`  
-  Raw signal samples over time
+![Signal](plots/signal.png)
 
-- `frequency_spectrum.csv`  
-  FFT magnitude vs frequency
+### Frequency Spectrum
 
-- `detections.csv`  
-  Detected frequency peaks and signal candidates
+![Spectrum](plots/spectrum.png)
 
 ---
 
@@ -72,11 +73,25 @@ The system generates structured CSV outputs:
 
 - C++
 - Standard Template Library (STL)
-- (Optional) FFTW library for optimized FFT computation
 - Linux (WSL / Ubuntu)
 - CMake (optional build system)
 
 ---
+
+## Current Learning Objectives
+
+This repository documents my journey learning Digital Signal Processing (DSP) from first principles.
+
+Topics explored include:
+
+- Sampling theory
+- Fourier Transform
+- DFT vs FFT
+- Window functions
+- Spectral leakage
+- Peak detection
+- RF signal simulation
+
 
 ## Why This Project Matters
 
@@ -92,15 +107,29 @@ These concepts are directly applicable to RF systems, radar signal processing, a
 
 ---
 
-## Future Improvements
+## Roadmap
 
-- Real-time signal processing using streaming input
-- GUI visualization of frequency spectrum
-- Integration with Raspberry Pi sensor inputs
-- Advanced detection algorithms (autocorrelation / adaptive filtering)
-- Performance benchmarking and optimization
+- FIR filtering
+- IIR filtering
+- CSV export
+- Real microphone input
+- Raspberry Pi ADC integration
+- RTL-SDR support
+- Spectrogram generation
+- Performance benchmarking
+- Real-time streaming FFT
+- Target classification experiments
 
 ---
+
+## Documentation
+
+Additional engineering notes are available in the `docs/` directory.
+
+- DSP Notes
+- FFT Notes
+- Experiment Log
+- Project Journal
 
 ## Author
 
