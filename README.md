@@ -45,6 +45,10 @@ Magnitude Spectrum
   Peak Detection
         │
         ▼
+    CSVExporter
+        |
+        |
+        ▼
    Visualization
 ```
 ---

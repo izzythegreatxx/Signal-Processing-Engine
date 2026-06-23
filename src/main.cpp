@@ -4,6 +4,7 @@
 #include "FFTProcessor.h"
 #include "Plotter.h"
 #include "PeakDetection.h"
+#include "CSVExporter.h"
 
 int main() {
     double sampleRate = 1024.0; 
@@ -24,8 +25,7 @@ int main() {
 
     std::vector<double> signal = gen.generateSignal();
 
-    plotter.plotTimeDomain(signal, sampleRate, signal.size(), "plots/signal.png");
-
+    
     
     // Create an FFTProcessor instance with the same sample rate
     FFTProcessor fft(sampleRate, signal.size()); // sample rate: 1kHz
@@ -36,9 +36,9 @@ int main() {
         std::cout << "Bin " << i << " (" << freq << " Hz): " << magnitudes[i] <<std::endl;
     }
 
-    plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "plots/spectrum.png");
+  
 
-
+    // Detect peaks in the magnitude spectrum
     PeakDetection peakDetector;
     auto peaks = peakDetector.detectPeaks(magnitudes, 0.1); // Threshold for peak detection
 
@@ -50,7 +50,23 @@ int main() {
 
         std::cout << "Peak detected: " << freq << " Hz (mag=" << mag << ")\n";
     }
+
+    // Export the magnitude spectrum to a CSV file
+    CSVExporter::exportSpectrum("plots/magnitude_spectrum.csv", magnitudes, sampleRate, signal.size());
+
+    // Export the detected peaks to a CSV file
+    CSVExporter::exportPeaks("plots/detected_peaks.csv", peaks, sampleRate, signal.size());
+
+    // Export the time-domain signal to a CSV file
+    CSVExporter::exportSignal("plots/time_domain_signal.csv", signal, sampleRate);  
  
+
+    // Visualize the magnitude spectrum
+    plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "plots/spectrum.png");
+
+
+    // Visualize time-domain signal
+    plotter.plotTimeDomain(signal, sampleRate, signal.size(), "plots/signal.png");
 
     return 0;
 }
