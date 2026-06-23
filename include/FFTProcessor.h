@@ -14,17 +14,13 @@ public:
     std::vector<double> computeMagnitudeFFT(const std::vector<double>& signal);
 
 
-    // Detects peaks in the magnitude spectrum above a specified threshold
-    std::vector<std::pair<int, double>> detectPeaks(
-        const std::vector<double>& magnitudes, 
-        double threshold);
     // Converts a bin index to its corresponding frequency
     double binToFrequency(int bin) const;
 
 private:
     // Sample rate of the signal
     double sampleRate_;
-    
+
     // Size of the FFT (number of samples)
     size_t N_;
     

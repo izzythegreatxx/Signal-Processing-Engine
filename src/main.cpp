@@ -3,6 +3,7 @@
 #include "SignalGenerator.h"
 #include "FFTProcessor.h"
 #include "Plotter.h"
+#include "PeakDetection.h"
 
 int main() {
     double sampleRate = 1024.0; 
@@ -38,7 +39,8 @@ int main() {
     plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "plots/spectrum.png");
 
 
-    auto peaks = fft.detectPeaks(magnitudes, 0.1); // Threshold for peak detection
+    PeakDetection peakDetector;
+    auto peaks = peakDetector.detectPeaks(magnitudes, 0.1); // Threshold for peak detection
 
     for (auto& p : peaks) {
         int bin = p.first;
