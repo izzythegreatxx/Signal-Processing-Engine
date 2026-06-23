@@ -21,4 +21,7 @@ public:
                             double sampleRate,
                             std::size_t fftSize);
 
+private:
+        static std::ofstream openFile(const std::string& filename);
+
 };
