@@ -1,4 +1,5 @@
-# Signal Processing Engine (C++ FFT-Based RF Analysis System)
+# Signal Processing Engine
+*A modular C++ framework for learning and implementing digital signal processing algorithms.*
 
 ## Overview
 
@@ -25,6 +26,7 @@ The system is designed to emulate real-world signal processing workflows used in
 
 ## Current Project Structure
 
+```text
 SignalGenerator
         │
         ▼
@@ -44,9 +46,8 @@ Peak Detection
         │
         ▼
 Visualization
-
+```
 ---
-
 
 ## Example Use Case
 
@@ -92,7 +93,6 @@ Topics explored include:
 - Peak detection
 - RF signal simulation
 
-
 ## Why This Project Matters
 
 This project demonstrates core competencies in:
@@ -130,6 +130,33 @@ Additional engineering notes are available in the `docs/` directory.
 - FFT Notes
 - Experiment Log
 - Project Journal
+
+---
+
+## Project Status
+
+Active Development
+
+Current Focus:
+- Recursive Cooley–Tukey FFT
+- DSP fundamentals
+- Signal analysis
+- Engineering documentation
+
+---
+
+## Repository Structure
+
+Signal-Processing-Engine/
+│
+├── include/       Header files
+├── src/           Source files
+├── docs/          Engineering notes and experiments
+├── plots/         Generated plots
+├── README.md
+├── Makefile
+└── .gitignore
+---
 
 ## Author
 
