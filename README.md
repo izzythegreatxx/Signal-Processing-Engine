@@ -27,25 +27,25 @@ The system is designed to emulate real-world signal processing workflows used in
 ## Current Project Structure
 
 ```text
-SignalGenerator
+  SignalGenerator
         │
         ▼
-Sampled Signal
+  Sampled Signal
         │
         ▼
-Windowing
+    Windowing
         │
         ▼
-DFT / FFT
+    DFT / FFT
         │
         ▼
 Magnitude Spectrum
         │
         ▼
-Peak Detection
+  Peak Detection
         │
         ▼
-Visualization
+   Visualization
 ```
 ---
 
@@ -93,17 +93,11 @@ Topics explored include:
 - Peak detection
 - RF signal simulation
 
-## Why This Project Matters
+## Why I Built This Project
 
-This project demonstrates core competencies in:
+I built this project to deepen my understanding of Digital Signal Processing (DSP), frequency-domain analysis, and systems programming in C++.
 
-- Digital signal processing (DSP)
-- Frequency-domain analysis
-- Noise modeling and filtering
-- Algorithmic implementation in C++
-- System-level software design
-
-These concepts are directly applicable to RF systems, radar signal processing, and embedded sensor analysis environments.
+The long-term goal is to evolve this project from simulated RF signals to real sensor inputs using microphones, Raspberry Pi hardware, and software-defined radios (RTL-SDR). These concepts are directly applicable to radar, RF communication, and embedded sensing systems.
 
 ---
 
