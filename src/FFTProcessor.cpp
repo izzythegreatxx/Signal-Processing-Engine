@@ -2,8 +2,82 @@
 #include "FFTProcessor.h"
 #include <cmath>
 #include <vector>
+#include <complex>
 
 static constexpr double PI = 3.14159265358979323846;
+
+
+bool FFTProcessor::isPowerOfTwo(size_t n) const {
+    return n > 0 && (n & (n - 1)) == 0;
+}
+
+// DFT implementation (naive O(N^2) algorithm)
+
+void FFTProcessor::fft(std::vector<std::complex<double>>& data) const {
+    const size_t N = data.size();
+
+    if (N <= 1) {
+        return;
+    }
+
+    std::vector<std::complex<double>> even(N / 2);
+    std::vector<std::complex<double>> odd(N / 2);
+
+    for (size_t i = 0; i < N / 2; i++) {
+        even[i] = data[2 * i];
+        odd[i] = data[2 * i + 1];
+    } 
+
+    fft(even);
+    fft(odd);
+
+    for (size_t k = 0; k < N / 2; k++) {
+        std::complex<double> twiddle = std::polar(1.0, -2.0 * PI * k / N) * odd[k];
+
+        data[k] = even[k] + twiddle;
+        data[k + N / 2] = even[k] - twiddle;
+    }
+}
+
+// FFT implementation based on Cooley-Tukey algorithm
+
+std::vector<double> FFTProcessor::computeMagnitudeFFT(const std::vector<double>& signal) {
+    if (signal.size() != N_) {
+        throw std::runtime_error("Signal size must match FFT size");
+    }
+
+    if (!isPowerOfTwo(N_)) {
+        throw std::runtime_error("FFT size must be a power of two");
+    }
+
+    std::vector<double> samples = signal;
+    applyWindow(samples);
+
+    double windowSum = 0.0;
+    for (double w : window_) {
+        windowSum += w;
+    }
+
+    std::vector<std::complex<double>> data(N_);
+
+    for (size_t i = 0; i < N_; i++) {
+        // Convert real samples to complex numbers (imaginary part is 0)
+        data[i] = std::complex<double>(samples[i], 0.00);
+    }
+
+    // Perform FFT on the complex data
+    fft(data);
+
+    // Compute the magnitude of the FFT results
+    std::vector<double> magnitudes(N_ / 2);
+
+    for (size_t k = 0; k < N_ / 2; k++) {
+        // Normalize by window sum and scale for single-sided spectrum
+        magnitudes[k] = (2.0 / windowSum) * std::abs(data[k]); 
+    }
+
+    return magnitudes;
+}
 
 std::vector<double> FFTProcessor::createHannWindow() const {
     std::vector<double> window(N_);
@@ -55,7 +129,7 @@ double FFTProcessor::binToFrequency(int bin) const {
 }
 
  
-std::vector<double> FFTProcessor::computeMagnitude(const std::vector<double>& signal) {
+std::vector<double> FFTProcessor::computeMagnitudeDFT(const std::vector<double>& signal) {
     if (signal.size() != N_) {
         throw std::runtime_error("Input signal size must match FFT size");
     }

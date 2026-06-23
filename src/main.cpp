@@ -5,7 +5,7 @@
 #include "Plotter.h"
 
 int main() {
-    double sampleRate = 1000.0; // 1 kHz
+    double sampleRate = 1024.0; 
     double duration = 1.0; // 1 second
 
     // Create a SignalGenerator instance with a sample rate of 1000 Hz and a duration of 1 second
@@ -28,8 +28,8 @@ int main() {
     
     // Create an FFTProcessor instance with the same sample rate
     FFTProcessor fft(sampleRate, signal.size()); // sample rate: 1kHz
-    std::vector<double> magnitudes = fft.computeMagnitude(signal);
-    std::cout << "FFT Magnitudes:" << std::endl;
+    std::vector<double> magnitudes = fft.computeMagnitudeFFT(signal);
+    std::cout << "DFT Magnitudes:" << std::endl;
     for (size_t i = 0; i < 100; i++) { 
         double freq = fft.binToFrequency(i);
         std::cout << "Bin " << i << " (" << freq << " Hz): " << magnitudes[i] <<std::endl;
