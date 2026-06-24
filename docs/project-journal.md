@@ -112,3 +112,62 @@ std::vector<double> samples;
 
 - Why does normalization affect peak amplitude?
 - Compare Hann vs Hamming window.
+
+
+
+# June 24, 2026
+
+## Benchmarking DFT vs FFT Performance
+
+### Objective
+Implement a performance benchmarking system to compare the execution time of DFT and FFT implementations using statistical averaging.
+
+---
+
+### What I Built
+
+- Implemented a `BenchmarkRunner` class using `std::chrono`
+- Added lambda-based timing system for reusable benchmarking
+- Introduced averaging over multiple runs (100 iterations)
+- Separated computation (FFTProcessor) from measurement (BenchmarkRunner)
+
+---
+
+### Key Results
+
+For a sample signal:
+
+- DFT Average Time: ~18.18 ms  
+- FFT Average Time: ~0.86 ms  
+- Observed Speedup: ~21× faster FFT performance
+
+---
+
+### Key Learnings
+
+- DFT has O(N²) complexity and scales poorly with signal size
+- FFT reduces complexity to O(N log N), resulting in major performance gains
+- Averaging multiple runs improves measurement stability
+- Benchmarking must isolate computation (no printing or extra I/O)
+
+---
+
+### Design Improvements
+
+- Separated responsibilities:
+  - FFTProcessor → signal processing
+  - BenchmarkRunner → performance measurement
+  - CSVExporter → data export
+
+- Used lambda functions for generic benchmarking:
+  - Allows benchmarking any callable function
+  - Removes dependency between benchmarking and DSP code
+
+---
+
+### Next Steps
+
+- Benchmark across multiple signal sizes (256 → 8192 samples)
+- Export results to CSV for visualization
+- Plot complexity curves (DFT vs FFT)
+- Add warm-up runs for more accurate benchmarking
