@@ -5,6 +5,7 @@
 #include "Plotter.h"
 #include "PeakDetection.h"
 #include "CSVExporter.h"
+#include "BenchmarkRunner.h"
 
 int main() {
     double sampleRate = 1024.0; 
@@ -37,6 +38,23 @@ int main() {
     }
 
   
+    // Benchmarking DFT and FFT
+    BenchmarkRunner benchmark;
+
+    // DFT
+    std::vector<double> dftResult;
+    double dftTime = benchmark.timeAverage([&]() {
+        dftResult = fft.computeMagnitudeDFT(signal);
+    }, 100);
+
+    // FFT
+    std::vector<double> fftResult;
+    double fftTime = benchmark.timeAverage([&]() {
+        fftResult = fft.computeMagnitudeFFT(signal);
+    }, 100);
+
+    std::cout << "DFT Average Time: " << dftTime << " ms" << std::endl;
+    std::cout << "FFT Average Time: " << fftTime << " ms" << std::endl;
 
     // Detect peaks in the magnitude spectrum
     PeakDetection peakDetector;

@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-
+// Helper function to open a file and handle errors
 std::ofstream CSVExporter::openFile(const std::string& filename)
 {
     std::ofstream file(filename);
@@ -53,5 +53,5 @@ void CSVExporter::exportPeaks(const std::string& filename,
         double frequency = (static_cast<double>(peak.first) * sampleRate) / fftSize;
         file << frequency << "," << peak.second << "\n";
     }
-    
+
 }
