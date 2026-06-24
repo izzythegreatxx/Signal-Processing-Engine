@@ -83,6 +83,12 @@ Magnitude Spectrum
 
 ---
 
+## Performance Benchmarking
+
+The project includes a benchmarking system comparing DFT and FFT implementations using statistical averaging.
+
+Typical results show FFT achieving ~20x+ speed improvement over DFT depending on signal size.
+
 ## Current Learning Objectives
 
 This repository documents my journey learning Digital Signal Processing (DSP) from first principles.
