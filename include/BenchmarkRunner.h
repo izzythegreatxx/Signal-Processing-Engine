@@ -8,6 +8,7 @@ struct BenchmarkResult {
     std::size_t sampleSize;
     double dftTimeMs;
     double fftTimeMs;
+    double speedup;
 
 };
 

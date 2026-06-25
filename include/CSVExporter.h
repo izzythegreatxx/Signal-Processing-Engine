@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BenchmarkRunner.h"
 #include <vector>
 #include <fstream>
 #include <stdexcept>
@@ -20,6 +21,9 @@ public:
                             const std::vector<std::pair<int, double>>& peaks,
                             double sampleRate,
                             std::size_t fftSize);
+
+    static void exportBenchmarkResults(const std::string& filename,
+                                       const std::vector<BenchmarkResult>& results);    
 
 private:
         static std::ofstream openFile(const std::string& filename);

@@ -1,27 +1,57 @@
 # Signal Processing Engine
 *A modular C++ framework for learning and implementing digital signal processing algorithms.*
 
+## Performance Analysis Included
+
+This project includes a full benchmarking suite comparing:
+- Direct Fourier Transform (DFT)
+- Fast Fourier Transform (FFT)
+
+Across multiple input sizes to demonstrate algorithmic scaling behavior.
+
 ## Overview
 
-The Signal Processing Engine is a modular C++ framework for simulating, analyzing, and processing noisy RF-like signals. It implements a full signal pipeline including signal generation, FFT-based spectral analysis, filtering, and frequency-domain feature detection.
+The Signal Processing Engine is a modular C++ digital signal processing (DSP) framework designed to simulate, analyze, and benchmark RF-like signals.
 
-The system is designed to emulate real-world signal processing workflows used in RF analysis, radar-like systems, and embedded sensor data interpretation.
+It implements a full end-to-end signal processing pipeline including signal generation, time-frequency analysis, spectral feature extraction, and performance benchmarking of Fourier transform algorithms.
+
+The system is designed to emulate real-world DSP workflows used in RF analysis, radar systems, and embedded signal processing applications.
 
 ---
 
 ## Current Features
 
-- Simulates RF-like signals using configurable sine waves and additive noise
-- Performs spectral analysis using both:
-  - Direct Fourier Transform (DFT)
-  - Recursive Cooley–Tukey Fast Fourier Transform (FFT)
-- Applies a Hann window prior to frequency analysis
-- Detects dominant frequency peaks
-- Plots:
-  - Time-domain waveform
-  - Frequency spectrum
-- Modular C++ architecture with separate signal generation, FFT processing, and plotting components
+### Signal Generation
+- Synthetic RF-like signal generation
+- Configurable sine wave components
+- Additive white Gaussian noise simulation
 
+### Signal Processing
+- Direct Fourier Transform (DFT) implementation (O(N²))
+- Fast Fourier Transform (FFT) using Cooley–Tukey algorithm (O(N log N))
+- Hann windowing to reduce spectral leakage
+
+### Feature Extraction
+- Magnitude spectrum computation
+- Frequency bin mapping
+- Peak detection of dominant frequency components
+
+### Benchmarking System
+- Automated performance benchmarking across multiple input sizes:
+  - 256 → 8192 samples
+- Repeated timing using high-resolution clock averaging
+- Comparison of:
+  - DFT execution time
+  - FFT execution time
+  - Speedup factor (DFT / FFT)
+
+### Data Export & Visualization
+- CSV export for:
+  - Time-domain signals
+  - Frequency spectra
+  - Peak detection results
+  - Benchmark results
+- Python/plotting-ready data outputs
 ---
 
 ## Current Project Structure
@@ -83,11 +113,59 @@ Magnitude Spectrum
 
 ---
 
-## Performance Benchmarking
+## Benchmarking System
+- Automated benchmarking across multiple signal sizes:
+  - 256, 512, 1024, 2048, 4096, 8192 samples
+- Repeated timing using high-resolution clock averaging
+- Comparison of:
+  - DFT execution time
+  - FFT execution time
+  - Speedup factor (DFT / FFT)
 
-The project includes a benchmarking system comparing DFT and FFT implementations using statistical averaging.
+## Data Export
+CSV export functionality for:
+- Time-domain signal
+- Frequency spectrum
+- Peak detection results
+- Benchmark performance results
 
-Typical results show FFT achieving ~20x+ speed improvement over DFT depending on signal size.
+---
+
+## Benchmark Results (Example)
+
+| Sample Size | DFT (ms) | FFT (ms) | Speedup |
+|------------|----------|----------|----------|
+| 256        | 0.98     | 0.16     | 6.2×     |
+| 512        | 4.49     | 0.42     | 10.6×    |
+| 1024       | 20.59    | 0.88     | 23.4×    |
+| 2048       | 70.95    | 1.53     | 46.1×    |
+| 4096       | 272.05   | 3.50     | 77.6×    |
+| 8192       | 1418.90  | 7.24     | 195.7×   |
+
+---
+
+## Key Insight
+
+This project empirically demonstrates the computational complexity difference between two fundamental Fourier transform approaches:
+
+- Direct Fourier Transform (DFT): O(N²)
+- Fast Fourier Transform (FFT): O(N log N)
+
+As input size increases, the FFT provides dramatically increasing performance benefits.
+
+Observed results show FFT speedups scaling from ~6× at small inputs to nearly 200× at larger inputs (N = 8192).
+
+---
+
+## Benchmark Results (Summary)
+
+The benchmarking system measures execution time across increasing signal sizes and computes a speedup factor:
+
+Speedup = DFT time / FFT time
+
+This provides a direct performance comparison between naive and optimized frequency-domain analysis methods.
+
+The results clearly show that FFT efficiency improves significantly as signal size increases.
 
 ## Current Learning Objectives
 
@@ -105,24 +183,39 @@ Topics explored include:
 
 ## Why I Built This Project
 
-I built this project to deepen my understanding of Digital Signal Processing (DSP), frequency-domain analysis, and systems programming in C++.
+I built this project to deepen my understanding of Digital Signal Processing (DSP), Fourier analysis, and systems-level performance engineering in C++.
 
-The long-term goal is to evolve this project from simulated RF signals to real sensor inputs using microphones, Raspberry Pi hardware, and software-defined radios (RTL-SDR). These concepts are directly applicable to radar, RF communication, and embedded sensing systems.
+The goal was not only to implement FFT and DFT algorithms, but to validate their computational complexity through empirical benchmarking.
+
+This project is intended to evolve toward real-world signal processing applications such as:
+- RF signal analysis
+- Embedded sensor processing
+- Radar-style signal interpretation
+- Software-defined radio (SDR) experimentation using hardware inputs
 
 ---
 
 ## Roadmap
 
+### Signal Processing Enhancements
 - FIR filtering
 - IIR filtering
-- CSV export
-- Real microphone input
-- Raspberry Pi ADC integration
-- RTL-SDR support
 - Spectrogram generation
-- Performance benchmarking
 - Real-time streaming FFT
-- Target classification experiments
+
+### Hardware Integration
+- Raspberry Pi sensor input
+- Microphone-based signal capture
+- RTL-SDR support for RF signals
+
+### Analysis & Performance
+- Noise robustness testing (SNR analysis)
+- FFT optimization improvements
+- Multi-threaded processing
+
+### Visualization
+- Python-based analysis dashboard
+- Real-time plotting of frequency spectrum
 
 ---
 

@@ -35,10 +35,23 @@ std::vector<BenchmarkResult> BenchmarkSuite::runAll()
         BenchmarkResult result;
         result.sampleSize = N;
 
-        // DFT Benchmark
-        result.dftTimeMs = bench.timeAverage([&]() {
+        // warm up (DFT and FFT)
+        for (int i = 0; i < 10; i++) 
+        {
             fft.computeMagnitudeDFT(signal);
+            fft.computeMagnitudeFFT(signal);
+        }
+
+        // DFT Benchmark
+        result.dftTimeMs = bench.timeAverage([&fft, &signal]() {
+            return fft.computeMagnitudeDFT(signal);
         }, 100);
+        
+        // FFT Benchmark
+        result.fftTimeMs = bench.timeAverage([&fft, &signal]() {
+            return fft.computeMagnitudeFFT(signal);
+        }, 100);
+        
 
         results.push_back(result);
     }
