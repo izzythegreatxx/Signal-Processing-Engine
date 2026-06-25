@@ -171,3 +171,108 @@ For a sample signal:
 - Export results to CSV for visualization
 - Plot complexity curves (DFT vs FFT)
 - Add warm-up runs for more accurate benchmarking
+
+## June 25, 2026 — Benchmarking & Performance Analysis Upgrade
+
+### Objective
+
+Extend the DSP system to include formal performance benchmarking of DFT vs FFT implementations and analyze algorithmic complexity empirically.
+
+---
+
+### What I Implemented Today
+
+#### Benchmarking System Completion
+- Moved benchmarking responsibility fully into `BenchmarkSuite`
+- Removed benchmarking logic from `main.cpp`
+- Standardized experiment execution across multiple signal sizes:
+  - 256 → 8192 samples
+
+---
+
+#### CSV Export System
+- Implemented structured CSV export for benchmarking results
+- Added support for:
+  - DFT execution time
+  - FFT execution time
+  - Speedup calculation (DFT / FFT)
+
+Output format:
+Sample_size,DFT_Time_ms,FFT_Time_ms,Speedup
+
+
+---
+
+#### Speedup Metric Introduction
+
+Defined and implemented:
+
+Speedup = DFT_Time / FFT_Time
+
+
+This metric provides a direct comparison between naive and optimized Fourier transform implementations.
+
+---
+
+### Key Results
+
+Observed performance scaling:
+
+- FFT speedup increases with input size
+- At N = 8192:
+  - DFT ≈ 1418 ms
+  - FFT ≈ 7.2 ms
+  - Speedup ≈ 195×
+
+---
+
+### Key Insights
+
+#### 1. Algorithmic Complexity Verified
+- DFT exhibits O(N²) scaling
+- FFT exhibits O(N log N) scaling
+- Empirical results match theoretical expectations
+
+#### 2. Importance of Speedup Metric
+- Raw execution times are difficult to compare across scales
+- Speedup provides a normalized performance comparison
+- Clearly shows FFT advantage increasing with N
+
+#### 3. Benchmarking Stability Improvements
+- Introduced warm-up runs (to reduce cache effects)
+- Averaged multiple runs for stability
+- Isolated computation from I/O and printing
+
+---
+
+### Design Improvements
+
+- Clean separation of responsibilities:
+  - BenchmarkSuite → experiment orchestration
+  - BenchmarkRunner → timing utility
+  - CSVExporter → data serialization
+  - FFTProcessor → signal processing core
+
+---
+
+### Real-World Relevance
+
+This benchmarking structure mirrors real DSP validation workflows used in:
+
+- Radar signal processing systems
+- RF spectrum analysis pipelines
+- Embedded sensor performance testing
+- EO/IR signal processing evaluation
+
+---
+
+### Next Steps
+
+- Generate visualization of benchmark curves
+- Plot:
+  - DFT vs FFT execution time
+  - Speedup vs N
+- Add theoretical complexity overlays:
+  - O(N²)
+  - O(N log N)
+- Extend benchmarking with noise sensitivity tests (SNR analysis)
