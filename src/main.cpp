@@ -2,7 +2,6 @@
 #include <iostream>
 #include "SignalGenerator.h"
 #include "FFTProcessor.h"
-#include "Plotter.h"
 #include "PeakDetection.h"
 #include "CSVExporter.h"
 #include "BenchmarkRunner.h"
@@ -22,8 +21,6 @@ int main() {
     auto results = suite.runAll();
     CSVExporter::exportBenchmarkResults("plots/benchmark_results.csv", results);
 
-    // Create a Plotter instance
-    Plotter plotter;
 
     // Simulated RF signals
     gen.addSineWave(50.0, 1.0);  // 50 Hz sine wave with amplitude 1.0
@@ -66,30 +63,6 @@ int main() {
 
     // Export the time-domain signal to a CSV file
     CSVExporter::exportSignal("plots/time_domain_signal.csv", signal, sampleRate);  
- 
-
-    // Visualize the magnitude spectrum
-    plotter.plotSpectrum(magnitudes, sampleRate, signal.size(), "plots/spectrum.png");
-
-
-    // Visualize time-domain signal
-    plotter.plotTimeDomain(signal, sampleRate, signal.size(), "plots/signal.png");
-
-    // Visualize benchmark results
-    std::vector<std::size_t> N;
-    std::vector<double> dftResult;
-    std::vector<double> fftResult;
-    std::vector<double> speedup;
-
-    // fill vectors from results
-    for (const auto& r : results) {
-        N.push_back(r.sampleSize);
-        dftResult.push_back(r.dftTimeMs);
-        fftResult.push_back(r.fftTimeMs);
-        speedup.push_back(r.dftTimeMs / r.fftTimeMs);
-    }
-
-    plotter.plotBenchmarkResults(N, dftResult, fftResult, speedup, "plots/benchmark");
-
-    return 0;
 }
+
+
