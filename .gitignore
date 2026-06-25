@@ -11,3 +11,9 @@ test_plot
 
 # Build directory
 build/
+
+*.out
+
+
+# CSV files
+*.csv
