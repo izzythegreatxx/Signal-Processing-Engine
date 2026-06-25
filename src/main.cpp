@@ -7,6 +7,7 @@
 #include "CSVExporter.h"
 #include "BenchmarkRunner.h"
 #include "BenchmarkSuite.h"
+#include <vector>
 
 int main() {
     double sampleRate = 1024.0; 
@@ -73,6 +74,22 @@ int main() {
 
     // Visualize time-domain signal
     plotter.plotTimeDomain(signal, sampleRate, signal.size(), "plots/signal.png");
+
+    // Visualize benchmark results
+    std::vector<std::size_t> N;
+    std::vector<double> dftResult;
+    std::vector<double> fftResult;
+    std::vector<double> speedup;
+
+    // fill vectors from results
+    for (const auto& r : results) {
+        N.push_back(r.sampleSize);
+        dftResult.push_back(r.dftTimeMs);
+        fftResult.push_back(r.fftTimeMs);
+        speedup.push_back(r.dftTimeMs / r.fftTimeMs);
+    }
+
+    plotter.plotBenchmarkResults(N, dftResult, fftResult, speedup, "plots/benchmark");
 
     return 0;
 }

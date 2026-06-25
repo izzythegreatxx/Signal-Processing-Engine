@@ -131,31 +131,42 @@ CSV export functionality for:
 
 ---
 
-## Benchmark Results (Example)
+## Benchmark Results (DFT vs FFT Performance Analysis)
+
+The system benchmarks Direct Fourier Transform (DFT) against Fast Fourier Transform (FFT) across increasing input sizes.
+
+### Observed Performance
 
 | Sample Size | DFT (ms) | FFT (ms) | Speedup |
-|------------|----------|----------|----------|
-| 256        | 0.98     | 0.16     | 6.2×     |
-| 512        | 4.49     | 0.42     | 10.6×    |
-| 1024       | 20.59    | 0.88     | 23.4×    |
-| 2048       | 70.95    | 1.53     | 46.1×    |
-| 4096       | 272.05   | 3.50     | 77.6×    |
-| 8192       | 1418.90  | 7.24     | 195.7×   |
+|-------------|----------|----------|----------|
+| 256         | 1.07     | 0.15     | 7.0×     |
+| 512         | 5.00     | 0.39     | 13.0×    |
+| 1024        | 17.70    | 0.74     | 24.0×    |
+| 2048        | 66.65    | 1.52     | 43.8×    |
+| 4096        | 260.83   | 3.03     | 86.2×    |
+| 8192        | 1055.45  | 7.78     | 135.7×   |
 
 ---
 
-## Key Insight
+### Key Insight
 
-This project empirically demonstrates the computational complexity difference between two fundamental Fourier transform approaches:
+- DFT scales approximately as **O(N²)**
+- FFT scales approximately as **O(N log N)**
+- Speedup increases significantly with input size
 
-- Direct Fourier Transform (DFT): O(N²)
-- Fast Fourier Transform (FFT): O(N log N)
-
-As input size increases, the FFT provides dramatically increasing performance benefits.
-
-Observed results show FFT speedups scaling from ~6× at small inputs to nearly 200× at larger inputs (N = 8192).
+This empirically demonstrates the computational advantage of FFT for large-scale signal processing.
 
 ---
+
+## Benchmark Visualizations
+
+### DFT vs FFT Timing
+
+![Benchmark Timing](plots/benchmark_timing.png)
+
+### FFT Speedup vs DFT
+
+![Speedup Plot](plots/benchmark_speedup.png)
 
 ## Benchmark Results (Summary)
 
