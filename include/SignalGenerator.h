@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
+#include <cstddef>
 
 class SignalGenerator {
 public:
-    SignalGenerator(double sampleRate, double duration);
+    SignalGenerator(double sampleRate, std::size_t numSamples);
 
     std::vector<double> generateSignal();
 
@@ -13,7 +14,7 @@ public:
 private:
     double sampleRate;
     double duration;
-    int numSamples;
+    std::size_t numSamples;
 
     struct SineComponent {
         double frequency;

@@ -9,10 +9,10 @@
 
 int main() {
     double sampleRate = 1024.0; 
-    double duration = 1.0; // 1 second
+    size_t numSamples = 1024; // Number of samples in the signal
 
-    // Create a SignalGenerator instance with a sample rate of 1000 Hz and a duration of 1 second
-    SignalGenerator gen(sampleRate, duration); // Sample rate: 1kHz, Duration: 1 second
+    // Create a SignalGenerator instance
+    SignalGenerator gen(sampleRate, numSamples); // Sample rate: 1024 Hz, 1024 samples
 
     // Create a Plotter instance
     Plotter plotter;

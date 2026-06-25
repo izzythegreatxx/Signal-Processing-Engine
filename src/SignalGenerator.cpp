@@ -12,11 +12,9 @@ which can be used for further processing or analysis.
 
 static constexpr double PI = 3.14159265358979323846;
 
-SignalGenerator::SignalGenerator(double sampleRate, double duration)
-    : sampleRate(sampleRate), duration(duration), noiseAmplitude(0.0)
-{
-    numSamples = static_cast<int>(sampleRate * duration);
-}
+SignalGenerator::SignalGenerator(double sampleRate, std::size_t numSamples)
+    : sampleRate(sampleRate), numSamples(numSamples), noiseAmplitude(0.0){}
+    
 // Adds a sine wave component to the signal with the specified frequency and amplitude
 void SignalGenerator::addSineWave(double frequency, double amplitude) {
     components.push_back({frequency, amplitude});

@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <complex>
+#include <iostream>
 
 static constexpr double PI = 3.14159265358979323846;
 
@@ -27,7 +28,7 @@ void FFTProcessor::fft(std::vector<std::complex<double>>& data) const {
         even[i] = data[2 * i];
         odd[i] = data[2 * i + 1];
     } 
-
+    // Recursively apply FFT to even and odd indexed elements
     fft(even);
     fft(odd);
 
@@ -89,7 +90,8 @@ std::vector<double> FFTProcessor::createHannWindow() const {
 }
 
 void FFTProcessor::applyWindow(std::vector<double>& signal) const {
-    for (size_t i = 0; i < signal.size(); i++) {
+    size_t limit = std::min(signal.size(), window_.size());
+    for (size_t i = 0; i < limit; i++) {
         signal[i] *= window_[i];    
     }
 }
@@ -141,7 +143,6 @@ std::vector<double> FFTProcessor::computeMagnitudeDFT(const std::vector<double>&
         // Magnitude is sqrt(real^2 + imag^2)
         magnitudes[k] = (2.0 / windowSum) * sqrt(real * real + imag * imag); 
     }
-
     return magnitudes;
 }
 
