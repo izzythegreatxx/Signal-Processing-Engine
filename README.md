@@ -133,9 +133,9 @@ CSV export functionality for:
 
 ## Benchmark Results (DFT vs FFT Performance Analysis)
 
-The system benchmarks Direct Fourier Transform (DFT) against Fast Fourier Transform (FFT) across increasing input sizes.
+This project benchmarks Direct Fourier Transform (DFT) against Fast Fourier Transform (FFT) across increasing input sizes to validate theoretical complexity differences.
 
-### Observed Performance
+### Results
 
 | Sample Size | DFT (ms) | FFT (ms) | Speedup |
 |-------------|----------|----------|----------|
@@ -146,16 +146,13 @@ The system benchmarks Direct Fourier Transform (DFT) against Fast Fourier Transf
 | 4096        | 260.83   | 3.03     | 86.2×    |
 | 8192        | 1055.45  | 7.78     | 135.7×   |
 
----
-
 ### Key Insight
 
-- DFT scales approximately as **O(N²)**
-- FFT scales approximately as **O(N log N)**
-- Speedup increases significantly with input size
+- DFT exhibits O(N²) complexity
+- FFT exhibits O(N log N) complexity
+- Speedup increases significantly with input size, validating theoretical expectations
 
-This empirically demonstrates the computational advantage of FFT for large-scale signal processing.
-
+This demonstrates the computational advantage of FFT for large-scale signal processing applications.
 ---
 
 ## Benchmark Visualizations
@@ -168,15 +165,15 @@ This empirically demonstrates the computational advantage of FFT for large-scale
 
 ![Speedup Plot](plots/benchmark_speedup.png)
 
-## Benchmark Results (Summary)
+## Performance Summary
 
-The benchmarking system measures execution time across increasing signal sizes and computes a speedup factor:
+The benchmarking system measures execution time of DFT and FFT implementations across multiple signal sizes and computes a performance ratio:
 
-Speedup = DFT time / FFT time
+Speedup = DFT Time / FFT Time
 
-This provides a direct performance comparison between naive and optimized frequency-domain analysis methods.
+This provides a normalized measure of FFT efficiency compared to brute-force Fourier analysis.
 
-The results clearly show that FFT efficiency improves significantly as signal size increases.
+The results consistently show increasing FFT advantage as signal size grows.
 
 ## Current Learning Objectives
 
@@ -194,39 +191,35 @@ Topics explored include:
 
 ## Why I Built This Project
 
-I built this project to deepen my understanding of Digital Signal Processing (DSP), Fourier analysis, and systems-level performance engineering in C++.
+I built this project to develop a deeper understanding of Digital Signal Processing (DSP), Fourier analysis, and systems-level performance engineering in C++.
 
-The goal was not only to implement FFT and DFT algorithms, but to validate their computational complexity through empirical benchmarking.
+The goal was not only to implement FFT and DFT algorithms, but to empirically validate their computational complexity through benchmarking.
 
-This project is intended to evolve toward real-world signal processing applications such as:
-- RF signal analysis
-- Embedded sensor processing
-- Radar-style signal interpretation
-- Software-defined radio (SDR) experimentation using hardware inputs
+This project bridges theoretical DSP concepts with practical performance analysis.
 
 ---
 
 ## Roadmap
 
 ### Signal Processing Enhancements
-- FIR filtering
-- IIR filtering
+- FIR filtering implementation
+- IIR filtering implementation
 - Spectrogram generation
-- Real-time streaming FFT
+- Real-time FFT streaming
 
 ### Hardware Integration
 - Raspberry Pi sensor input
-- Microphone-based signal capture
-- RTL-SDR support for RF signals
+- Microphone-based signal acquisition
+- RTL-SDR RF signal capture
 
-### Analysis & Performance
-- Noise robustness testing (SNR analysis)
+### Performance & Analysis
+- Noise robustness (SNR testing)
 - FFT optimization improvements
-- Multi-threaded processing
+- Multi-threaded processing experiments
 
 ### Visualization
 - Python-based analysis dashboard
-- Real-time plotting of frequency spectrum
+- Enhanced performance plotting tools
 
 ---
 
