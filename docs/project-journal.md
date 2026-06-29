@@ -276,3 +276,13 @@ This benchmarking structure mirrors real DSP validation workflows used in:
   - O(N²)
   - O(N log N)
 - Extend benchmarking with noise sensitivity tests (SNR analysis)
+
+# June 29, 2026 - FIR filtering
+
+## Implemented FIR filter (moving average / future extensions)
+
+- Learned that FFT magnitude scaling requires coherent gain normalization
+- Fixed amplitude distortion caused by incorrect window normalization
+- Understood difference between theoretical window sum vs discrete implementation
+- Improved consistency between FFT and DFT outputs
+- Learned that windowing affects spectral amplitude, not just noise reduction

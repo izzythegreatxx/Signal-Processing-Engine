@@ -31,6 +31,8 @@ The system is designed to emulate real-world DSP workflows used in RF analysis, 
 - Fast Fourier Transform (FFT) using Cooley–Tukey algorithm (O(N log N))
 - Hann windowing to reduce spectral leakage
 
+
+
 ### Feature Extraction
 - Magnitude spectrum computation
 - Frequency bin mapping
@@ -81,6 +83,22 @@ Magnitude Spectrum
         ▼
    Visualization
 ```
+---
+
+### DSP Accuracy & Windowing Improvements
+
+- Implemented Hann windowing for spectral leakage reduction
+- Added coherent gain normalization for accurate amplitude scaling
+- Fixed FFT/DFT magnitude scaling for physically meaningful frequency spectra
+- Improved consistency between FFT and DFT outputs for validation
+
+---
+### Filtering
+
+- Implemented FIR filtering (moving average filter)
+- Applied preprocessing filter before frequency-domain analysis
+- Enabled noise reduction prior to FFT-based spectral analysis
+
 ---
 
 ## Example Use Case
@@ -148,9 +166,10 @@ This project benchmarks Direct Fourier Transform (DFT) against Fast Fourier Tran
 
 ### Key Insight
 
-- DFT exhibits O(N²) complexity
-- FFT exhibits O(N log N) complexity
-- Speedup increases significantly with input size, validating theoretical expectations
+- FFT vs DFT benchmarking validates O(N log N) vs O(N²) behavior
+- Windowing significantly improves spectral clarity by reducing leakage
+- Coherent gain normalization ensures accurate amplitude representation in frequency domain
+- Filtering improves signal-to-noise ratio before spectral analysis, enabling clearer peak detection
 
 This demonstrates the computational advantage of FFT for large-scale signal processing applications.
 ---
@@ -196,6 +215,10 @@ I built this project to develop a deeper understanding of Digital Signal Process
 The goal was not only to implement FFT and DFT algorithms, but to empirically validate their computational complexity through benchmarking.
 
 This project bridges theoretical DSP concepts with practical performance analysis.
+
+---
+
+This project evolved from a basic FFT implementation into a full digital signal processing pipeline including filtering, windowing, and spectral analysis. It bridges theoretical DSP concepts with practical implementation in C++.
 
 ---
 
