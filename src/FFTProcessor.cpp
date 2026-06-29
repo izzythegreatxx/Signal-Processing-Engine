@@ -12,7 +12,6 @@ bool FFTProcessor::isPowerOfTwo(size_t n) const {
     return n > 0 && (n & (n - 1)) == 0;
 }
 
-// DFT implementation (naive O(N^2) algorithm)
 
 void FFTProcessor::fft(std::vector<std::complex<double>>& data) const {
     const size_t N = data.size();
@@ -54,10 +53,11 @@ std::vector<double> FFTProcessor::computeMagnitudeFFT(const std::vector<double>&
     std::vector<double> samples = signal;
     applyWindow(samples);
 
-    double windowSum = 0.0;
+    double coherentGain = 0.0;
     for (double w : window_) {
-        windowSum += w;
+        coherentGain += w;
     }
+    coherentGain /= N_; // Normalize coherent gain
 
     std::vector<std::complex<double>> data(N_);
 
@@ -74,7 +74,7 @@ std::vector<double> FFTProcessor::computeMagnitudeFFT(const std::vector<double>&
 
     for (size_t k = 0; k < N_ / 2; k++) {
         // Normalize by window sum and scale for single-sided spectrum
-        magnitudes[k] = (2.0 / windowSum) * std::abs(data[k]); 
+        magnitudes[k] = (2.0 / coherentGain) * std::abs(data[k]) / N_; // Normalize by N_ to get the correct amplitude
     }
 
     return magnitudes;
@@ -116,10 +116,11 @@ std::vector<double> FFTProcessor::computeMagnitudeDFT(const std::vector<double>&
 
     applyWindow(samples);
 
-    double windowSum = 0.0;
+    double coherentGain = 0.0;
     for (double w : window_) {
-        windowSum += w;
+        coherentGain += w;
     }
+    coherentGain /= N_; // Normalize coherent gain
 
     // DFT computation
     int N = samples.size();
@@ -140,8 +141,8 @@ std::vector<double> FFTProcessor::computeMagnitudeDFT(const std::vector<double>&
             imag -= samples[n] * sin(angle);
 
         }
-        // Magnitude is sqrt(real^2 + imag^2)
-        magnitudes[k] = (2.0 / windowSum) * sqrt(real * real + imag * imag); 
+        // amplitude scaling: multiply by 2 for single-sided spectrum and divide by coherent gain to account for windowing
+        magnitudes[k] = (2.0 / coherentGain) * sqrt(real * real + imag * imag) / N_; // Normalize by N_ to get the correct amplitude
     }
     return magnitudes;
 }

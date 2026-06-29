@@ -23,7 +23,7 @@ void CSVExporter::exportSignal(const std::string& filename,
     std::ofstream file = openFile(filename);
 
     // CSV Header
-    file << "Time (s), Amplitude\n";
+    file << "Time_s,Amplitude\n";
 
     for (std::size_t i = 0; i < signal.size(); ++i) {
         file << (static_cast<double>(i) / sampleRate) << "," << signal[i] << "\n";
@@ -40,7 +40,7 @@ void CSVExporter::exportSpectrum(const std::string& filename,
     std::ofstream file = openFile(filename);   
     
     // CSV Header
-    file << "Frequency (Hz),Magnitude\n";
+    file << "Frequency_Hz,Magnitude\n";
 
     for (std::size_t i = 0; i < magnitudes.size(); ++i) {
         double frequency = (static_cast<double>(i) * sampleRate) / fftSize;
@@ -57,7 +57,7 @@ void CSVExporter::exportPeaks(const std::string& filename,
 {
     std::ofstream file = openFile(filename);
     // CSV Header
-    file << "Frequency (Hz),Magnitude\n";
+    file << "Frequency_Hz,Magnitude\n";
 
     for (const auto& peak : peaks) {
         double frequency = (static_cast<double>(peak.first) * sampleRate) / fftSize;

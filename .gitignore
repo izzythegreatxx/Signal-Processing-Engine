@@ -8,11 +8,12 @@ test_plot
 
 # Object files
 *.o
+*.out
 
 # Build directory
 build/
 
-*.out
+
 
 
 # CSV files
