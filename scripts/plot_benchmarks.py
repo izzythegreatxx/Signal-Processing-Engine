@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 
 
 df = pd.read_csv("plots/benchmark_results.csv")
-ms = pd.read_csv("plots/magnitude_spectrum.csv")
+rms = pd.read_csv("plots/raw_magnitude_spectrum.csv")
+fms = pd.read_csv("plots/magnitude_spectrum.csv")
 td = pd.read_csv("plots/time_domain_signal.csv")
 
 
@@ -34,15 +35,25 @@ plt.grid()
 plt.savefig("plots/speedup.png")
 
 
-# Magnitude Spectrum for a specific sample size
+# Filtered Magnitude Spectrum for a specific sample size using filtered signal
 sample_size = 1024
 plt.figure()
-plt.plot(ms["Frequency_Hz"], ms["Magnitude"], label=f"Magnitude Spectrum (N={sample_size})")
+plt.plot(fms["Frequency_Hz"], fms["Magnitude"], label=f"Magnitude Spectrum (N={sample_size})")
 plt.xlabel("Frequency Bin")
 plt.ylabel("Magnitude")
-plt.title(f"Magnitude Spectrum for Sample Size {sample_size}")
+plt.title(f"Filtered (FIR) Signal Magnitude Spectrum")
 plt.grid()
-plt.savefig("plots/magnitude_spectrum.png")
+plt.savefig("plots/Magnitude_spectrum.png")
+
+# Raw Magnitude Spectrum for a specific sample size using the raw signal
+sample_size = 1024
+plt.figure()
+plt.plot(rms["Frequency_Hz"], rms["Magnitude"], label=f"Magnitude Spectrum (N={sample_size})")
+plt.xlabel("Frequency Bin")
+plt.ylabel("Magnitude")
+plt.title("Raw Signal Magnitude Spectrum")
+plt.grid()
+plt.savefig("plots/raw_signal_spectrum.png")
 
 
 # Time-Domain Signal

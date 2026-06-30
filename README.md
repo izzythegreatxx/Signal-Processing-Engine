@@ -174,6 +174,15 @@ This project benchmarks Direct Fourier Transform (DFT) against Fast Fourier Tran
 This demonstrates the computational advantage of FFT for large-scale signal processing applications.
 ---
 
+## FIR Filtering Comparisons
+
+### Raw Signal Spectrum
+
+![Raw Signal Spectrum](plots/raw_signal_spectrum.png)
+
+### Filtered Signal Spectrum
+![Filtered Signal Spectrum](plots/Magnitude_spectrum.png)
+
 ## Benchmark Visualizations
 
 ### DFT vs FFT Timing
