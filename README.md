@@ -114,11 +114,11 @@ Magnitude Spectrum
 
 ### Time-Domain Signal
 
-![Signal](plots/signal.png)
+![Signal](plots/time_domain_signal.png)
 
 ### Frequency Spectrum
 
-![Spectrum](plots/spectrum.png)
+![Spectrum](plots/Magnitude_spectrum.png)
 
 ---
 
@@ -187,11 +187,11 @@ This demonstrates the computational advantage of FFT for large-scale signal proc
 
 ### DFT vs FFT Timing
 
-![Benchmark Timing](plots/benchmark_timing.png)
+![Benchmark Timing](plots/timing.png)
 
 ### FFT Speedup vs DFT
 
-![Speedup Plot](plots/benchmark_speedup.png)
+![Speedup Plot](plots/speedup.png)
 
 ## Performance Summary
 
